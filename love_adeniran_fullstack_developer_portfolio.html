@@ -1,0 +1,811 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Love Adeniran | Fullstack Software Engineer</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Phosphor Icons for modern vector icons -->
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+    <!-- Inter Font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Fira+Code:wght@400;500&display=swap"
+        rel="stylesheet">
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        mono: ['Fira Code', 'monospace'],
+                    },
+                    colors: {
+                        brand: {
+                            50: '#eef2ff',
+                            100: '#e0e7ff',
+                            400: '#818cf8',
+                            500: '#6366f1',
+                            600: '#4f46e5',
+                            900: '#312e81',
+                        },
+                        cyanAccent: '#06b6d4',
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        /* Custom Utilities & Animations */
+        .glass-panel {
+            background: rgba(15, 23, 42, 0.75);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            /* text: #ffdf74 */
+        }
+
+        .glass-panel-light {
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(0, 0, 0, 0.08);
+        }
+
+        .gradient-text {
+            background: linear-gradient(135deg, #6366f1 0%, #06b6d4 100%);
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .glow-effect {
+            box-shadow: 0 0 25px -5px rgba(99, 102, 241, 0.3);
+        }
+
+        /* Custom scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #0f172a;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: #334155;
+            border-radius: 4px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: #475569;
+        }
+    </style>
+</head>
+
+<body
+    class="font-sans antialiased selection:bg-brand-500 selection:text-white transition-colors duration-300 min-h-screen flex flex-col">
+
+    <!-- Background Decorative Elements -->
+    <div class="fixed inset-0 pointer-events-none z-0 overflow-hidden">
+        <div class="absolute -top-40 -left-40 w-96 h-96 bg-brand-600/20 rounded-full blur-3xl"></div>
+        <div class="absolute top-1/3 -right-40 w-96 h-96 bg-cyan-500/15 rounded-full blur-3xl"></div>
+        <div class="absolute bottom-10 left-1/3 w-80 h-80 bg-indigo-500/10 rounded-full blur-3xl"></div>
+    </div>
+
+    <!-- Navigation Bar -->
+    <header class="sticky top-0 z-50 bg-glass:blur border-slate-800/80 shadow-2xl">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+            <!-- Brand / Name -->
+            <a href="#hero"
+                class="flex items-center gap-2 font-mono font-bold text-lg  text-brand-600 hover:text-slate-400 transition-colors">
+                <span class="text-brand-500">&lt;</span>LoveAdeniran<span class="text-brand-500"> /&gt;</span>
+            </a>
+
+            <!-- Desktop Nav Links -->
+            <nav class="hidden md:flex items-center gap-8 text-sm font-medium text-slate-600">
+                <a href="#about" class="hover:text-brand-400 transition-colors">About</a>
+                <a href="#skills" class="hover:text-brand-400 transition-colors">Skills</a>
+                <a href="#projects" class="hover:text-brand-400 transition-colors">Projects</a>
+                <a href="#experience" class="hover:text-brand-400 transition-colors">Experience</a>
+                <a href="#contact" class="hover:text-brand-400 transition-colors">Contact</a>
+            </nav>
+
+            <!-- CTA & Mobile Menu Toggle -->
+            <div class="flex items-center gap-3">
+                <a href="#contact"
+                    class="hidden sm:inline-flex items-center justify-center px-4 py-2 text-xs font-semibold rounded-lg bg-brand-600 hover:bg-brand-500 text-white transition-all shadow-md hover:shadow-brand-500/25">
+                    Apply Connect
+                </a>
+
+                <button id="mobileMenuBtn" aria-label="Toggle Navigation Menu"
+                    class="md:hidden p-2 rounded-lg text-slate-400 hover:text-white hover:bg-slate-800 transition-colors">
+                    <i class="ph ph-list text-2xl"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- Mobile Menu Nav Dropdown -->
+        <div id="mobileMenu"
+            class="hidden md:hidden border-t border-slate-800 bg-slate-900/95 px-4 pt-3 pb-6 space-y-3 font-medium">
+            <a href="#about" class="mobile-link block text-slate-300 hover:text-brand-400 py-1">About</a>
+            <a href="#skills" class="mobile-link block text-slate-300 hover:text-brand-400 py-1">Skills</a>
+            <a href="#projects" class="mobile-link block text-slate-300 hover:text-brand-400 py-1">Projects</a>
+            <a href="#experience" class="mobile-link block text-slate-300 hover:text-brand-400 py-1">Experience</a>
+            <a href="#contact" class="mobile-link block text-slate-300 hover:text-brand-400 py-1">Contact</a>
+        </div>
+    </header>
+
+    <!-- Main Content Container -->
+    <main class="relative z-10 flex-grow max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 space-y-4 py-6 ">
+
+        <!-- HERO SECTION -->
+        <section id="hero" class="pt-8 sm:pt-16 flex flex-col md:flex-row items-center justify-between gap-12 ">
+            <div class="flex-1 space-y-6 text-center md:text-left">
+                <!-- Status Badge -->
+                <div
+                    class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-brand-500/10 border border-brand-500/20 text-brand-400 text-xs font-medium">
+                    <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+                    Available for Fullstack Developer Role
+                </div>
+
+                <!-- Main Heading -->
+                <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-[#ffcb13] leading-tight">
+                    Hi, I'm <span class="gradient-text">Love Adeniran</span>
+                </h1>
+
+                <!-- Subheading -->
+                <p class="text-lg sm:text-xl text-slate-400 max-w-2xl font-light">
+                    Fullstack Software Engineer (BTech CS) building scalable RESTful services and modern user interfaces
+                    with <span class="text-white font-medium">NestJS</span>, <span
+                        class="text-brand-400 font-medium">ReactJS</span>, <span
+                        class="text-brand-400 font-medium">Prisma ORM</span>, and <span
+                        class="text-brand-400 font-medium">PostgreSQL</span>.
+                </p>
+
+                <!-- Action Buttons -->
+                <div class="flex flex-wrap items-center justify-center md:justify-start gap-4 pt-2">
+                    <a href="#contact"
+                        class="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-gradient-to-r from-brand-600 to-cyan-600 hover:from-brand-500 hover:to-cyan-500 text-white font-semibold transition-all shadow-lg hover:shadow-cyan-500/20">
+                        <i class="ph ph-paper-plane-tilt text-lg"></i> Send Application Email
+                    </a>
+                    <a href="https://github.com/Love-Adeniran" target="_blank" rel="noopener noreferrer"
+                        class="inline-flex items-center gap-2 px-6 py-3 rounded-xl glass-panel hover:bg-slate-800 text-slate-200 font-medium transition-all border border-slate-700">
+                        <i class="ph ph-github-logo text-xl"></i> GitHub Profile
+                    </a>
+                </div>
+
+                <!-- Key Highlights Badges -->
+                <div
+                    class="pt-6 border-t border-slate-800/80 flex flex-wrap justify-center md:justify-start gap-6 text-slate-400 text-xs sm:text-sm font-mono">
+                    <div class="flex items-center gap-2">
+                        <i class="ph ph-map-pin text-brand-400 text-base"></i> Lagos, Nigeria
+                    </div>
+                    <div class="flex items-center gap-2">
+                        <i class="ph ph-graduation-cap text-cyan-400 text-base"></i> BTech Computer Science
+                    </div>
+                    <div class="flex items-center gap-2">
+                        <i class="ph ph-check-circle text-emerald-400 text-base"></i> Real-World Project Experience
+                    </div>
+                </div>
+            </div>
+
+            <!-- Visual Hero Card / Code Mockup -->
+            <div class="w-full md:w-5/12 max-w-md">
+                <div class="glass-panel rounded-2xl p-4 shadow-2xl border border-slate-700/60 relative group">
+                    <div
+                        class="absolute -inset-0.5 bg-gradient-to-r from-brand-500 to-cyan-500 rounded-2xl blur opacity-25 group-hover:opacity-40 transition duration-500">
+                    </div>
+                    <div
+                        class="relative bg-slate-900 rounded-xl p-4 font-mono text-xs text-slate-300 space-y-3 overflow-hidden">
+                        <!-- Code Header -->
+                        <div class="flex items-center justify-between pb-3 border-b border-slate-800 text-slate-500">
+                            <div class="flex space-x-1.5">
+                                <span class="w-3 h-3 rounded-full bg-rose-500 inline-block"></span>
+                                <span class="w-3 h-3 rounded-full bg-amber-500 inline-block"></span>
+                                <span class="w-3 h-3 rounded-full bg-emerald-500 inline-block"></span>
+                            </div>
+                            <span>engineer.ts</span>
+                        </div>
+                        <!-- Code Snippet -->
+                        <div>
+                            <p><span class="text-purple-400">interface</span> <span
+                                    class="text-yellow-300">Candidate</span> {</p>
+                            <p class="pl-4"><span class="text-blue-400">name</span>: <span
+                                    class="text-emerald-300">'Love Adeniran'</span>;</p>
+                            <p class="pl-4"><span class="text-blue-400">role</span>: <span
+                                    class="text-emerald-300">'Fullstack Software Engineer'</span>;</p>
+                            <p class="pl-4"><span class="text-blue-400">stack</span>: [<span
+                                    class="text-emerald-300">'NestJS'</span>, <span
+                                    class="text-emerald-300">'React'</span>, <span
+                                    class="text-emerald-300">'Prisma'</span>, <span
+                                    class="text-emerald-300">'PostgreSQL'</span>];</p>
+                            <p class="pl-4"><span class="text-blue-400">status</span>: <span
+                                    class="text-emerald-300">'Ready for Impact'</span>;</p>
+                            <p>}</p>
+                            <br>
+                            <p><span class="text-purple-400">async function</span> <span
+                                    class="text-blue-400">buildSolution</span>() {</p>
+                            <p class="pl-4 text-slate-500">// Delivering reliable, clean code</p>
+                            <p class="pl-4"><span class="text-purple-400">return new</span> <span
+                                    class="text-yellow-300">VirtualGrowDigitalIntern</span>();</p>
+                            <p>}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ABOUT SECTION -->
+        <section id="about" class="space-y-6 ">
+            <div class="text-center md:text-left">
+                <h2 class="text-2xl sm:text-3xl font-bold text-brand-400 flex items-center gap-3">
+                    <i class="ph ph-user-circle text-brand-400"></i> About Me
+                </h2>
+                <div class="w-16 h-1 bg-brand-500 rounded mt-2"></div>
+            </div>
+
+            <div class="grid md:grid-cols-3 gap-6">
+                <div class="md:col-span-2 glass-panel rounded-2xl p-6 sm:p-8 space-y-4  leading-relaxed text-slate-300">
+                    <p>
+                        I am a dedicated software engineer with a strong foundation in computer science and a passion
+                        for crafting robust backend services and seamless web interfaces. Having built complete
+                        full-stack applications—ranging from enterprise asset management tools to modular backend
+                        authentication pipelines—I bring practical experience in managing full product lifecycles.
+                    </p>
+                    <p>
+                        My technical sweet spot combines the reliability of <strong>NestJS</strong> and <strong>Prisma
+                            ORM</strong> on the backend with the responsiveness of <strong>ReactJS</strong> and
+                        <strong>Tailwind CSS</strong> on the frontend. I prioritize clean code, secure architecture, and
+                        proactive team collaboration.
+                    </p>
+                </div>
+
+                <div class="glass-panel rounded-2xl p-6 space-y-4 flex flex-col justify-center border border-slate-800">
+                    <h3 class="font-bold text-white text-lg flex items-center gap-2">
+                        <i class="ph ph-lightning text-amber-400"></i> Quick Facts
+                    </h3>
+                    <ul class="space-y-3 text-sm text-slate-300">
+                        <li class="flex items-start gap-2">
+                            <i class="ph ph-check text-brand-400 mt-1"></i>
+                            <span><strong>Degree:</strong> BTech in Computer Science</span>
+                        </li>
+                        <li class="flex items-start gap-2">
+                            <i class="ph ph-check text-brand-400 mt-1"></i>
+                            <span><strong>Core Focus:</strong> Fullstack Architecture (Node/Nest + React)</span>
+                        </li>
+                        <li class="flex items-start gap-2">
+                            <i class="ph ph-check text-brand-400 mt-1"></i>
+                            <span><strong>Target Role:</strong> Fullstack Developer Intern at Virtual Grow
+                                Digital</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- SKILLS MATRIX -->
+        <section id="skills" class="space-y-8">
+            <div class="text-center md:text-left">
+                <h2 class="text-2xl sm:text-3xl font-bold flex items-center gap-12 text-brand-400">
+                    <i class="ph ph-cpu text-brand-400"></i> Technical Expertise
+                </h2>
+                <p class="text-slate-400 text-sm mt-1">Modern technologies and tooling I work with daily.</p>
+                <div class="w-16 h-1 bg-brand-500 rounded mt-2"></div>
+            </div>
+
+            <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- Frontend -->
+                <div
+                    class="glass-panel rounded-2xl p-6 space-y-4 border border-slate-800 hover:border-brand-500/50 transition-all group">
+                    <div class="flex items-center gap-3">
+                        <div
+                            class="p-3 rounded-xl bg-blue-500/10 text-blue-400 group-hover:bg-blue-500 group-hover:text-white transition-all">
+                            <i class="ph ph-browsers text-2xl"></i>
+                        </div>
+                        <h3 class="font-bold text-white text-lg">Frontend</h3>
+                    </div>
+                    <ul class="space-y-2 text-sm text-slate-300 font-mono">
+                        <li class="flex items-center gap-2"><span class="w-1.5 h-1.5 rounded-full bg-cyan-400"></span>
+                            ReactJS</li>
+                        <li class="flex items-center gap-2"><span class="w-1.5 h-1.5 rounded-full bg-cyan-400"></span>
+                            JavaScript (ES6+)</li>
+                        <li class="flex items-center gap-2"><span class="w-1.5 h-1.5 rounded-full bg-cyan-400"></span>
+                            HTML5 & CSS3</li>
+                        <li class="flex items-center gap-2"><span class="w-1.5 h-1.5 rounded-full bg-cyan-400"></span>
+                            Tailwind CSS</li>
+                    </ul>
+                </div>
+
+                <!-- Backend -->
+                <div
+                    class="glass-panel rounded-2xl p-6 space-y-4 border border-slate-800 hover:border-brand-500/50 transition-all group">
+                    <div class="flex items-center gap-3">
+                        <div
+                            class="p-3 rounded-xl bg-rose-500/10 text-rose-400 group-hover:bg-rose-500 group-hover:text-white transition-all">
+                            <i class="ph ph-code text-2xl"></i>
+                        </div>
+                        <h3 class="font-bold text-white text-lg">Backend</h3>
+                    </div>
+                    <ul class="space-y-2 text-sm text-slate-300 font-mono">
+                        <li class="flex items-center gap-2"><span class="w-1.5 h-1.5 rounded-full bg-rose-400"></span>
+                            NestJS</li>
+                        <li class="flex items-center gap-2"><span class="w-1.5 h-1.5 rounded-full bg-rose-400"></span>
+                            Node.js</li>
+                        <li class="flex items-center gap-2"><span class="w-1.5 h-1.5 rounded-full bg-rose-400"></span>
+                            Python</li>
+                        <li class="flex items-center gap-2"><span class="w-1.5 h-1.5 rounded-full bg-rose-400"></span>
+                            REST API Design</li>
+                    </ul>
+                </div>
+
+                <!-- Database & Auth -->
+                <div
+                    class="glass-panel rounded-2xl p-6 space-y-4 border border-slate-800 hover:border-brand-500/50 transition-all group">
+                    <div class="flex items-center gap-3">
+                        <div
+                            class="p-3 rounded-xl bg-emerald-500/10 text-emerald-400 group-hover:bg-emerald-500 group-hover:text-white transition-all">
+                            <i class="ph ph-database text-2xl"></i>
+                        </div>
+                        <h3 class="font-bold text-white text-lg">Database & Auth</h3>
+                    </div>
+                    <ul class="space-y-2 text-sm text-slate-300 font-mono">
+                        <li class="flex items-center gap-2"><span
+                                class="w-1.5 h-1.5 rounded-full bg-emerald-400"></span> PostgreSQL</li>
+                        <li class="flex items-center gap-2"><span
+                                class="w-1.5 h-1.5 rounded-full bg-emerald-400"></span> Prisma ORM</li>
+                        <li class="flex items-center gap-2"><span
+                                class="w-1.5 h-1.5 rounded-full bg-emerald-400"></span> Supabase (Auth/RLS)</li>
+                        <li class="flex items-center gap-2"><span
+                                class="w-1.5 h-1.5 rounded-full bg-emerald-400"></span> SQL Schema Design</li>
+                    </ul>
+                </div>
+
+                <!-- Tools & DevOps -->
+                <!-- <div class="glass-panel rounded-2xl p-6 space-y-4 border border-slate-800 hover:border-brand-500/50 transition-all group">
+                    <div class="flex items-center gap-3">
+                        <div class="p-3 rounded-xl bg-amber-500/10 text-amber-400 group-hover:bg-amber-500 group-hover:text-white transition-all">
+                            <i class="ph ph-wrench text-2xl"></i>
+                        </div>
+                        <h3 class="font-bold text-white text-lg">DevOps & Tools</h3>
+                    </div>
+                    <ul class="space-y-2 text-sm text-slate-300 font-mono">
+                        <li class="flex items-center gap-2"><span class="w-1.5 h-1.5 rounded-full bg-amber-400"></span> Git & GitHub</li>
+                        <li class="flex items-center gap-2"><span class="w-1.5 h-1.5 rounded-full bg-amber-400"></span> Nodemailer Integration</li>
+                        <li class="flex items-center gap-2"><span class="w-1.5 h-1.5 rounded-full bg-amber-400"></span> Barcode Hardware API</li>
+                        <li class="flex items-center gap-2"><span class="w-1.5 h-1.5 rounded-full bg-amber-400"></span> Deployment Pipelines</li>
+                    </ul>
+                </div> -->
+            </div>
+        </section>
+
+        <!-- FEATURED PROJECTS -->
+        <section id="projects" class="space-y-8">
+            <div class="flex flex-col sm:flex-row sm:items-end justify-between gap-4">
+                <div>
+                    <h2 class="text-2xl sm:text-3xl font-bold flex text-brand-400 items-center gap-3">
+                        <i class="ph ph-folder-star text-brand-400"></i> Featured Projects
+                    </h2>
+                    <p class="text-slate-400 text-sm mt-1">Real-world applications engineered for real operations.</p>
+                    <div class="w-16 h-1 bg-brand-500 rounded mt-2"></div>
+                </div>
+
+                <!-- Filter Tabs -->
+                <div
+                    class="flex items-center gap-2 bg-slate-900 p-1.5 rounded-xl border border-slate-800 self-start sm:self-auto">
+                    <button onclick="filterProjects('all')" id="tab-all"
+                        class="project-tab px-4 py-1.5 rounded-lg text-xs font-semibold bg-brand-600 text-white transition-all">All</button>
+                    <button onclick="filterProjects('fullstack')" id="tab-fullstack"
+                        class="project-tab px-4 py-1.5 rounded-lg text-xs font-semibold text-slate-400 hover:text-white transition-all">Fullstack</button>
+                    <button onclick="filterProjects('backend')" id="tab-backend"
+                        class="project-tab px-4 py-1.5 rounded-lg text-xs font-semibold text-slate-400 hover:text-white transition-all">Backend
+                        / Auth</button>
+                </div>
+            </div>
+
+            <!-- Projects Grid -->
+            <div class="grid md:grid-cols-2 gap-8">
+
+                <!-- Project 1 -->
+                <div class="project-card glass-panel rounded-2xl overflow-hidden border border-slate-800 hover:border-brand-500/50 transition-all flex flex-col"
+                    data-category="fullstack">
+                    <div class="p-6 sm:p-8 space-y-4 flex-grow">
+                        <div class="flex items-start justify-between gap-4">
+                            <div>
+                                <span
+                                    class="text-xs font-mono text-cyan-400 bg-cyan-950/60 border border-cyan-800/50 px-2.5 py-1 rounded-md">Enterprise
+                                    Fullstack Application</span>
+                                <h3 class="text-xl font-bold text-white mt-2">FOB Inventory & Asset Management System
+                                </h3>
+                            </div>
+                            <span class="p-2 bg-slate-800 rounded-lg text-slate-400"><i
+                                    class="ph ph-barcode text-2xl"></i></span>
+                        </div>
+
+                        <p class="text-sm text-slate-300 leading-relaxed">
+                            A comprehensive enterprise platform built for network hardware tracking, port utilization
+                            management, and equipment lifecycle auditing across office locations.
+                        </p>
+
+                        <div class="space-y-2 pt-2">
+                            <h4 class="text-xs font-semibold uppercase text-slate-400 tracking-wider">Key Engineering
+                                Achievements</h4>
+                            <ul class="space-y-1.5 text-xs text-slate-300">
+                                <li class="flex items-start gap-2">
+                                    <i class="ph ph-caret-right text-brand-400 mt-0.5"></i>
+                                    <span>Integrated real-time barcode scanning hardware for rapid asset
+                                        ingestion.</span>
+                                </li>
+                                <li class="flex items-start gap-2">
+                                    <i class="ph ph-caret-right text-brand-400 mt-0.5"></i>
+                                    <span>Built dynamic port utilization indicators and automated operational
+                                        workflows.</span>
+                                </li>
+                                <li class="flex items-start gap-2">
+                                    <i class="ph ph-caret-right text-brand-400 mt-0.5"></i>
+                                    <span>Structured relational schema with Prisma ORM & PostgreSQL for data
+                                        integrity.</span>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- Card Footer Tech Badges -->
+                    <div
+                        class="px-6 sm:px-8 py-4 bg-slate-900/80 border-t border-slate-800 flex flex-wrap items-center justify-between gap-2">
+                        <div class="flex flex-wrap gap-2 text-xs font-mono text-slate-400">
+                            <span class="px-2 py-0.5 rounded bg-slate-800 text-cyan-300">ReactJS</span>
+                            <span class="px-2 py-0.5 rounded bg-slate-800 text-rose-300">NestJS</span>
+                            <span class="px-2 py-0.5 rounded bg-slate-800 text-emerald-300">Prisma</span>
+                            <span class="px-2 py-0.5 rounded bg-slate-800 text-blue-300">PostgreSQL</span>
+                        </div>
+                        <button onclick="openModal('fob-modal')"
+                            class="text-xs font-semibold text-brand-400 hover:text-brand-300 flex items-center gap-1">
+                            Details <i class="ph ph-arrow-right"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Project 2 -->
+                <div class="project-card glass-panel rounded-2xl overflow-hidden border border-slate-800 hover:border-brand-500/50 transition-all flex flex-col"
+                    data-category="backend fullstack">
+                    <div class="p-6 sm:p-8 space-y-4 flex-grow">
+                        <div class="flex items-start justify-between gap-4">
+                            <div>
+                                <span
+                                    class="text-xs font-mono text-indigo-400 bg-indigo-950/60 border border-indigo-800/50 px-2.5 py-1 rounded-md">Architecture
+                                    Blueprint</span>
+                                <h3 class="text-xl font-bold text-white mt-2">Fullstack NestJS + React Application
+                                    Pipeline</h3>
+                            </div>
+                            <span class="p-2 bg-slate-800 rounded-lg text-slate-400"><i
+                                    class="ph ph-shield-check text-2xl"></i></span>
+                        </div>
+
+                        <p class="text-sm text-slate-300 leading-relaxed">
+                            An end-to-end fullstack template and service pipeline linking a modular NestJS API backend
+                            to a responsive React frontend with Supabase integration.
+                        </p>
+
+                        <div class="space-y-2 pt-2">
+                            <h4 class="text-xs font-semibold uppercase text-slate-400 tracking-wider">Key Engineering
+                                Achievements</h4>
+                            <ul class="space-y-1.5 text-xs text-slate-300">
+                                <li class="flex items-start gap-2">
+                                    <i class="ph ph-caret-right text-brand-400 mt-0.5"></i>
+                                    <span>Configured Supabase Authentication with custom Row Level Security (RLS)
+                                        policies.</span>
+                                </li>
+                                <li class="flex items-start gap-2">
+                                    <i class="ph ph-caret-right text-brand-400 mt-0.5"></i>
+                                    <span>Engineered email validation service with Nodemailer and transactional
+                                        tokens.</span>
+                                </li>
+                                <li class="flex items-start gap-2">
+                                    <i class="ph ph-caret-right text-brand-400 mt-0.5"></i>
+                                    <span>Styled reactive user workflows using Tailwind CSS responsive
+                                        containers.</span>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- Card Footer Tech Badges -->
+                    <div
+                        class="px-6 sm:px-8 py-4 bg-slate-900/80 border-t border-slate-800 flex flex-wrap items-center justify-between gap-2">
+                        <div class="flex flex-wrap gap-2 text-xs font-mono text-slate-400">
+                            <span class="px-2 py-0.5 rounded bg-slate-800 text-cyan-300">ReactJS</span>
+                            <span class="px-2 py-0.5 rounded bg-slate-800 text-rose-300">NestJS</span>
+                            <span class="px-2 py-0.5 rounded bg-slate-800 text-emerald-300">Supabase</span>
+                            <span class="px-2 py-0.5 rounded bg-slate-800 text-amber-300">Nodemailer</span>
+                        </div>
+                        <button onclick="openModal('pipeline-modal')"
+                            class="text-xs font-semibold text-brand-400 hover:text-brand-300 flex items-center gap-1">
+                            Details <i class="ph ph-arrow-right"></i>
+                        </button>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- WORK EXPERIENCE -->
+        <section id="experience" class="space-y-8">
+            <div class="text-center md:text-left">
+                <h2 class="text-2xl sm:text-3xl font-bold text-brand-400 flex items-center gap-3">
+                    <i class="ph ph-briefcase text-brand-400"></i> Work Experience
+                </h2>
+                <p class="text-slate-400 text-sm mt-1">Professional timeline and practical engineering roles.</p>
+                <div class="w-16 h-1 bg-brand-500 rounded mt-2"></div>
+            </div>
+
+            <!-- Experience Timeline -->
+            <div class="relative pl-6 sm:pl-8 border-l-2 border-slate-800 space-y-10">
+
+                <!-- Role 1 -->
+                <div class="relative group">
+                    <!-- Timeline dot -->
+                    <div
+                        class="absolute -left-[31px] sm:-left-[39px] top-1.5 w-4 h-4 rounded-full bg-brand-500 border-4 border-slate-950 group-hover:scale-125 transition-transform">
+                    </div>
+
+                    <div class="glass-panel rounded-2xl p-6 sm:p-8 space-y-4 border border-slate-800">
+                        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+                            <div>
+                                <h3 class="text-xl font-bold text-white">Software Developer & Support Coordinator</h3>
+                                <p class="text-brand-400 font-medium">FiberOne Broadband</p>
+                            </div>
+                            <span
+                                class="text-xs font-mono px-3 py-1 rounded-full bg-slate-800 text-slate-300 self-start sm:self-auto">
+                                October 2025 – October 2026
+                            </span>
+                        </div>
+
+                        <ul class="space-y-2.5 text-sm text-slate-300">
+                            <li class="flex items-start gap-2.5">
+                                <i class="ph ph-check-circle text-emerald-400 text-lg flex-shrink-0 mt-0.5"></i>
+                                <span>Engineered internal applications, including the <strong>FOB Inventory
+                                        system</strong>, automating asset tracking and improving network gear
+                                    visibility.</span>
+                            </li>
+                            <li class="flex items-start gap-2.5">
+                                <i class="ph ph-check-circle text-emerald-400 text-lg flex-shrink-0 mt-0.5"></i>
+                                <span>Managed technical service delivery tickets and mentored/supervised incoming
+                                    technical interns.</span>
+                            </li>
+                            <li class="flex items-start gap-2.5">
+                                <i class="ph ph-check-circle text-emerald-400 text-lg flex-shrink-0 mt-0.5"></i>
+                                <span>Co-supervised installation, signal benchmarking, and parameter testing for a
+                                    regional public Wi-Fi network rollout in Lagos.</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- APPLICATION & CONTACT SECTION -->
+        <!-- <section id="contact" class="w-full ">
+            <div class="text-center md:text-left">
+                <h2 class="text-2xl sm:text-3xl font-bold text-brand-400 flex items-center gap-3">
+                    <i class="ph ph-paper-plane text-brand-400"></i> Contact & Application Launcher
+                </h2>
+                <p class="text-slate-400 text-sm mt-1">Direct application route for Virtual Grow Digital Internship.</p>
+                <div class="w-16 h-1 bg-brand-500 rounded mt-2"></div>
+            </div>
+
+            <div class="grid lg:grid-cols-3 gap-8"> -->
+        <!-- Info Box -->
+        <!-- <div class="glass-panel rounded-2xl p-6 sm:p-8 space-y-6 border border-slate-800 flex flex-col justify-between">
+                    <div class="space-y-4">
+                        <span class="text-xs font-mono text-brand-400 bg-brand-950 px-2.5 py-1 rounded-md border border-brand-800/50">Target Internship</span>
+                        <h3 class="text-2xl font-bold text-white">Virtual Grow Digital</h3>
+                        <p class="text-sm text-slate-300">
+                            Remote Fullstack Developer Intern Position (3 to 6 months). Ready to contribute immediately to real-world products.
+                        </p>
+                    </div>
+
+                    <div class="space-y-3 pt-4 border-t border-slate-800 text-sm">
+                        <div class="flex items-center gap-3 text-slate-300">
+                            <i class="ph ph-envelope-simple text-xl text-brand-400"></i>
+                            <span class="font-mono text-xs sm:text-sm">hrvirtugrowdigital@gmail.com</span>
+                        </div>
+                        <div class="flex items-center gap-3 text-slate-300">
+                            <i class="ph ph-github-logo text-xl text-cyan-400"></i>
+                            <a href="https://github.com/Love-Adeniran" target="_blank" rel="noopener noreferrer" class="hover:underline font-mono text-xs sm:text-sm">github.com/Love-Adeniran</a>
+                        </div>
+                    </div>
+                </div> -->
+
+        <!-- Interactive Email Generator Form -->
+        <!-- <div class="lg:col-span-2 glass-panel rounded-2xl p-6 sm:p-8 border border-slate-800 space-y-6">
+                    <h3 class="text-xl font-bold text-brand-400 flex items-center gap-2">
+                        <i class="ph ph-envelope text-brand-400"></i> Generate Application Email
+                    </h3>
+
+                    <div class="space-y-4">
+                        <div>
+                            <label class="block text-xs font-medium text-slate-400 uppercase mb-1">To</label>
+                            <input type="text" readonly value="hrvirtugrowdigital@gmail.com" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-4 py-2.5 text-sm text-slate-300 font-mono">
+                        </div>
+
+                        <div>
+                            <label class="block text-xs font-medium text-slate-400 uppercase mb-1">Subject</label>
+                            <input id="emailSubject" type="text" value="Application for Fullstack Developer Intern - Love Adeniran" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-4 py-2.5 text-sm text-slate-100 font-medium focus:ring-2 focus:ring-brand-500 focus:outline-none">
+                        </div>
+
+                        <div>
+                            <label class="block text-xs font-medium text-slate-400 uppercase mb-1">Email Body Preview</label>
+                            <textarea id="emailBody" rows="6" class="w-full bg-slate-900 border border-slate-700 rounded-xl p-4 text-xs sm:text-sm text-slate-300 font-sans focus:ring-2 focus:ring-brand-500 focus:outline-none leading-relaxed"></textarea>
+                        </div>
+
+                        <div class="flex flex-wrap gap-3 pt-2">
+                            <button onclick="launchMailto()" class="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-brand-600 hover:bg-brand-500 text-white font-semibold transition-all shadow-md">
+                                <i class="ph ph-arrow-square-out text-lg"></i> Open Default Email Client
+                            </button>
+                            <button onclick="copyEmailText()" class="inline-flex items-center gap-2 px-5 py-3 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-200 font-medium transition-all border border-slate-700">
+                                <i class="ph ph-copy text-lg"></i> Copy Email Body
+                            </button>
+                        </div>
+                    </div> -->
+        <!-- </div> -->
+        <!-- </div>
+        </section> -->
+
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="glass-panel border-t border-slate-800/80 py-8 mt-24 text-center text-xs text-slate-500 space-y-2">
+        <p>&copy; 2026 Love Adeniran. Built with ReactJS, NestJS & Tailwind CSS in mind.</p>
+        <p class="font-mono text-slate-600">Lagos, Nigeria &bull; Prepared for Virtual Grow Digital</p>
+    </footer>
+
+    <!-- MODALS FOR PROJECT DETAILS -->
+    <!-- FOB Modal -->
+    <div id="fob-modal"
+        class="fixed inset-0 z-50 hidden bg-slate-950/80 backdrop-blur-md flex items-center justify-center p-4">
+        <div class="glass-panel bg-slate-900 max-w-xl w-full rounded-2xl p-6 sm:p-8 border border-slate-700 space-y-4">
+            <div class="flex items-center justify-between border-b border-slate-800 pb-3">
+                <h3 class="text-xl font-bold text-white">FOB Inventory Platform</h3>
+                <button onclick="closeModal('fob-modal')" class="text-slate-400 hover:text-white"><i
+                        class="ph ph-x text-2xl"></i></button>
+            </div>
+            <p class="text-sm text-slate-300">
+                Detailed architecture includes NestJS REST API microservices, PostgreSQL relational models managed by
+                Prisma ORM, and barcode hardware integration for field engineers.
+            </p>
+            <div
+                class="bg-slate-950 p-4 rounded-xl border border-slate-800 font-mono text-xs text-emerald-400 space-y-1">
+                <p>// Key Tech Specs</p>
+                <p>- Frontend: ReactJS + Tailwind UI components</p>
+                <p>- Backend: NestJS modular controllers & services</p>
+                <p>- Database: PostgreSQL via Prisma ORM</p>
+                <p>- Scanning: Hardware barcode reader integration</p>
+            </div>
+            <div class="text-right pt-2">
+                <button onclick="closeModal('fob-modal')"
+                    class="px-4 py-2 bg-slate-800 hover:bg-slate-700 text-white rounded-lg text-xs font-semibold">Close</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Pipeline Modal -->
+    <div id="pipeline-modal"
+        class="fixed inset-0 z-50 hidden bg-slate-950/80 backdrop-blur-md flex items-center justify-center p-4">
+        <div class="glass-panel bg-slate-900 max-w-xl w-full rounded-2xl p-6 sm:p-8 border border-slate-700 space-y-4">
+            <div class="flex items-center justify-between border-b border-slate-800 pb-3">
+                <h3 class="text-xl font-bold text-white">NestJS + React Pipeline</h3>
+                <button onclick="closeModal('pipeline-modal')" class="text-slate-400 hover:text-white"><i
+                        class="ph ph-x text-2xl"></i></button>
+            </div>
+            <p class="text-sm text-slate-300">
+                Implements production-ready authentication flows using Supabase Row Level Security (RLS) policies, JWT
+                validation, and Nodemailer email confirmation pipelines.
+            </p>
+            <div class="bg-slate-950 p-4 rounded-xl border border-slate-800 font-mono text-xs text-cyan-400 space-y-1">
+                <p>// Key Architecture Specs</p>
+                <p>- Auth: Supabase Auth & custom RLS DB policies</p>
+                <p>- Email: Nodemailer SMTP with verification tokens</p>
+                <p>- API: NestJS HTTP Guards & DTO validation</p>
+            </div>
+            <div class="text-right pt-2">
+                <button onclick="closeModal('pipeline-modal')"
+                    class="px-4 py-2 bg-slate-800 hover:bg-slate-700 text-white rounded-lg text-xs font-semibold">Close</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- NOTIFICATION TOAST -->
+    <div id="toast"
+        class="fixed bottom-6 right-6 z-50 hidden bg-slate-900 border border-slate-700 text-slate-100 px-4 py-3 rounded-xl shadow-xl flex items-center gap-3 font-medium text-xs">
+        <i class="ph ph-check-circle text-emerald-400 text-xl"></i>
+        <span id="toastMsg">Action completed successfully!</span>
+    </div>
+
+    <!-- JAVASCRIPT LOGIC -->
+    <script>
+        // Mobile Navigation Menu Toggle
+        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+        const mobileMenu = document.getElementById('mobileMenu');
+        mobileMenuBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        // Close mobile menu when clicking links
+        document.querySelectorAll('.mobile-link').forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.add('hidden');
+            });
+        });
+
+        // Project Filter Functionality
+        function filterProjects(category) {
+            const cards = document.querySelectorAll('.project-card');
+            const tabs = document.querySelectorAll('.project-tab');
+
+            // Update Tab Active States
+            tabs.forEach(tab => {
+                tab.classList.remove('bg-brand-600', 'text-white');
+                tab.classList.add('text-slate-400');
+            });
+            const activeTab = document.getElementById(`tab-${category}`);
+            if (activeTab) {
+                activeTab.classList.add('bg-brand-600', 'text-white');
+                activeTab.classList.remove('text-slate-400');
+            }
+
+            // Filter Cards
+            cards.forEach(card => {
+                const cardCat = card.getAttribute('data-category');
+                if (category === 'all' || cardCat.includes(category)) {
+                    card.style.display = 'flex';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        }
+
+        // Modal Functions
+        function openModal(id) {
+            document.getElementById(id).classList.remove('hidden');
+        }
+        function closeModal(id) {
+            document.getElementById(id).classList.add('hidden');
+        }
+
+        // Email Action Launchers
+        function launchMailto() {
+            const subject = encodeURIComponent(document.getElementById('emailSubject').value);
+            const body = encodeURIComponent(document.getElementById('emailBody').value);
+            window.location.href = `mailto:hrvirtugrowdigital@gmail.com?subject=${subject}&body=${body}`;
+            showToast('Opening default mail application...');
+        }
+
+        function copyEmailText() {
+            const textToCopy = document.getElementById('emailBody').value;
+            // Using execCommand for safe iframe compatibility
+            const textarea = document.createElement('textarea');
+            textarea.value = textToCopy;
+            document.body.appendChild(textarea);
+            textarea.select();
+            document.execCommand('copy');
+            document.body.removeChild(textarea);
+            showToast('Email content copied to clipboard!');
+        }
+
+        // Toast Notification System
+        function showToast(message) {
+            const toast = document.getElementById('toast');
+            const toastMsg = document.getElementById('toastMsg');
+            toastMsg.innerText = message;
+            toast.classList.remove('hidden');
+            setTimeout(() => {
+                toast.classList.add('hidden');
+            }, 3000);
+        }
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,13 @@
+[build]
+  publish = "."
+
+# Keep the old file-based URL working after renaming the page to index.html
+[[redirects]]
+  from = "/love_adeniran_fullstack_developer_portfolio"
+  to = "/"
+  status = 301
+
+[[redirects]]
+  from = "/love_adeniran_fullstack_developer_portfolio.html"
+  to = "/"
+  status = 301
